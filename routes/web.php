@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Api\BookController;
+
 
 
 Route::get('/', function () {
@@ -9,11 +11,9 @@ Route::get('/', function () {
 });
 
 
-Route::resource('contacts', ContactController::class);
-
-
-
 Route::get('/home', function(){
     return view('home');
 });
+
+Route::resource('contacts', ContactController::class);
 

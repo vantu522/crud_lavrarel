@@ -54,24 +54,34 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Contact $contact)
     {
         //
+        return view('contacts.edit',compact('contact'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Contact $contact)
     {
         //
+        $request->validate([
+            'name'=>'required',
+            'phone'=>'required',
+            'address'=>'required'
+        ]);
+
+        $contact->update($request->all());
+        return redirect()->route('contacts.index')->with('success','contacts updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return redirect()->route('contacts.index')->with('success');
     }
 }
